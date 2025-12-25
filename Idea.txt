@@ -1,0 +1,113 @@
+Keyword Search Web App
+
+-- A search bar that accepts keyword from user
+-- 1. Use Wikipedia API to get info on related keyword , any articles etc.
+-- 2. Use Reddit Json search for the particular keyword and find related social media content
+-- 3. Use NewsAPI to fetch any news related to the keyword
+-- 4. Use Rapid API (100 req / Month) to get any amazon product listings as per the keyword
+
+Implement parallel execution to different external APIS (For speed)
+
+Use caching method to cache recently searched(24hrs) keywords for faster fetch in future lookups
+
+API endpoint - http://localhost:3000/api/search/:query
+Example API fetch(Testing using PostMan) -
+{
+    "message": "Success",
+    "data": {
+        "_id": "694c1a68d61f5dc8f9d3ddc0",
+        "keyword": "macbook",
+        "__v": 0,
+        "lastUpdated": "2025-12-24T16:52:55.638Z",
+        "newsData": [
+            {
+                "title": "The Best Apple Cyber Monday Deals (2025)",
+                "link": "https://www.wired.com/story/apple-cyber-monday-deals-2025/",
+                "source": "Wired",
+                "image": "https://media.wired.com/photos/6923bedcb998c5a261d19b3d/191:100/w_1280,c_limit/The%20Best%20Apple%20Black%20Friday%20Deals.png"
+            },
+            {
+                "title": "Vote for the Best Tech of 2025 in Gizmodo’s Readers’ Choice Awards",
+                "link": "https://gizmodo.com/gizmodo-best-tech-of-2025-readers-choice-awards-2000694054",
+                "source": "Gizmodo.com",
+                "image": "https://gizmodo.com/app/uploads/2025/12/Gizmodo-Readers-Choice-Awards-Featured-Image-1200x675.jpg"
+            },
+            {
+                "title": "Microsoft’s latest 13-inch Surface Laptop is down to $549.99, a new record low price",
+                "link": "https://www.theverge.com/gadgets/830182/microsoft-surface-laptop-black-friday-2025-deal-sale",
+                "source": "The Verge",
+                "image": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/05/257765_Microsoft_Surface_Laptop_13_2025_ADiBenedetto_0013.jpg?quality=90&strip=all&crop=0%2C10.732984293194%2C100%2C78.534031413613&w=1200"
+            },
+            {
+                "title": "MacBooks Could Have ‘Intel Inside’ Once Again, Sort Of",
+                "link": "https://gizmodo.com/macbooks-could-have-intel-inside-once-again-sort-of-2000693931",
+                "source": "Gizmodo.com",
+                "image": "https://gizmodo.com/app/uploads/2025/12/MacBook-Models-1-1200x675.jpg"
+            }
+        ],
+        "productData": [
+            {
+                "title": "Apple 2025 MacBook Air 13-inch Laptop with M4 chip: Built for Apple Intelligence, 13.6-inch Liquid Retina Display, 16GB Unified Memory, 256GB SSD Storage, 12MP Center Stage Camera, Touch ID; Sky Blue EPEAT",
+                "link": "https://www.amazon.com/dp/B0DZDC3WW5",
+                "price": "$749.00",
+                "image": "https://m.media-amazon.com/images/I/712dp0yAydL._AC_UY654_FMwebp_QL65_.jpg"
+            },
+            {
+                "title": "Apple 2025 MacBook Air 13-inch Laptop with M4 chip: Built for Apple Intelligence, 13.6-inch Liquid Retina Display, 16GB Unified Memory, 256GB SSD Storage, 12MP Center Stage Camera, Touch ID; Silver EPEAT",
+                "link": "https://www.amazon.com/dp/B0DZD91W4F",
+                "price": "$749.00",
+                "image": "https://m.media-amazon.com/images/I/71igjFyr56L._AC_UY654_FMwebp_QL65_.jpg"
+            },
+            {
+                "title": "Apple 2025 MacBook Pro Laptop with M5 chip with 10‑core CPU and 10‑core GPU: Built for Apple Intelligence, 14.2-inch Liquid Retina XDR Display, 24GB Unified Memory, 1TB SSD Storage; Space Black",
+                "link": "https://www.amazon.com/dp/B0FWD726XF",
+                "price": "$1,799.00",
+                "image": "https://m.media-amazon.com/images/I/6112T6g2P-L._AC_UY654_FMwebp_QL65_.jpg"
+            },
+            {
+                "title": "Apple 2025 MacBook Air 15-inch Laptop with M4 chip: Built for Apple Intelligence, 15.3-inch Liquid Retina Display, 16GB Unified Memory, 256GB SSD Storage, 12MP Center Stage Camera, Touch ID; Midnight EPEAT",
+                "link": "https://www.amazon.com/dp/B0DZDBDCFH",
+                "price": "$949.00",
+                "image": "https://m.media-amazon.com/images/I/71Ej6sIsNaL._AC_UY654_FMwebp_QL65_.jpg"
+            },
+            {
+                "title": "Apple 2025 MacBook Air 13-inch Laptop with M4 chip: Built for Apple Intelligence, 13.6-inch Liquid Retina Display, 16GB Unified Memory, 256GB SSD Storage, 12MP Center Stage Camera, Touch ID; Starlight EPEAT",
+                "link": "https://www.amazon.com/dp/B0DZDCPMGK",
+                "price": "$749.00",
+                "image": "https://m.media-amazon.com/images/I/71grk2qki1L._AC_UY654_FMwebp_QL65_.jpg"
+            }
+        ],
+        "redditData": [
+            {
+                "title": "I Sort of Regret Buying a Macbook",
+                "url": "https://www.reddit.com/r/laptops/comments/1mn3p5z/i_sort_of_regret_buying_a_macbook/",
+                "score": 330
+            },
+            {
+                "title": "Do You Really Need a MacBook Pro? My Experience Switching from a MacBook Pro to a MacBook Air",
+                "url": "https://www.reddit.com/r/macbookpro/comments/1pd5axz/do_you_really_need_a_macbook_pro_my_experience/",
+                "score": 233
+            },
+            {
+                "title": "F*** MacBook finally got this beauty",
+                "url": "https://www.reddit.com/r/thinkpad/comments/1p5q4fo/f_macbook_finally_got_this_beauty/",
+                "score": 1140
+            },
+            {
+                "title": "Here Are the Four MacBooks Apple Is Expected to Launch Next Year",
+                "url": "https://www.reddit.com/r/apple/comments/1pbf9oo/here_are_the_four_macbooks_apple_is_expected_to/",
+                "score": 496
+            },
+            {
+                "title": "I regret buying MacBook Air",
+                "url": "https://www.reddit.com/r/laptops/comments/1lyl9b8/i_regret_buying_macbook_air/",
+                "score": 140
+            }
+        ],
+        "wikiData": {
+            "title": "MacBook",
+            "summary": "MacBook is a type of Mac laptop computer that is developed and marketed by Apple that use Apple's macOS operating system since 2006. The MacBook brand replaced the PowerBook and iBook brands during the Mac transition to Intel processors, announced in 2005. The current lineup consists of the MacBook Air (2008–present) and the MacBook Pro (2006–present). Two different lines simply named \"MacBook\" existed from 2006 to 2012 and 2015 to 2019. The MacBook brand was the \"world's top-selling line of premium laptops\" as of 2015.",
+            "url": "https://en.wikipedia.org/wiki/MacBook"
+        }
+    }
+}
