@@ -18,8 +18,8 @@ function RedditCard({data}) {
           <span className="text-xs font-bold">{data.score}</span>
         </div>
 
-        <div>
-          <h4 className="font-medium text-slate-800 text-sm leading-snug hover:text-orange-600 transition-colors">
+        <div className="min-w-0 flex-1">
+          <h4 className="font-medium text-slate-800 text-sm leading-snug hover:text-orange-600 transition-colors wrap-break-word">
             {data.title}
           </h4>
           <p className="text-xs text-slate-400 mt-2 flex items-center gap-1">
